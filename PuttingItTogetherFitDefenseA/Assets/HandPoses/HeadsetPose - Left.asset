@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487fd41142fbdaa47a8af89b3b03f50a, type: 3}
+  m_Name: HeadsetPose - Left
+  m_EditorClassIdentifier: 
+  thumb:
+    position: {x: 1.333717, y: -0.070399106, z: 0.43134817}
+    rotation: {x: -0.34221712, y: 0.016322324, z: 0.848251, w: 0.4038459}
+  index:
+    position: {x: -0.034557022, y: 0.11135876, z: 1.1993213}
+    rotation: {x: -0.11774357, y: -0.69541425, z: 0.7051511, w: 0.07278447}
+  middle:
+    position: {x: -0.08703368, y: -0.12287557, z: 1.0841266}
+    rotation: {x: -0.027356647, y: -0.77235913, z: 0.6345947, w: 0.0016446573}
+  ring:
+    position: {x: 0.17023493, y: -0.4134289, z: 1.578193}
+    rotation: {x: 0.019634727, y: -0.82548094, z: 0.5588903, w: -0.07640342}
+  pinky:
+    position: {x: -0.28927445, y: -0.59646547, z: 0.97917336}
+    rotation: {x: -0.28820398, y: -0.8056003, z: 0.3700947, w: -0.3619068}
