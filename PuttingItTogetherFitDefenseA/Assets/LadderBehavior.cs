@@ -19,6 +19,7 @@ public class LadderBehavior : MonoBehaviour
 
     public void NavigateLadderUpDown(SelectEnterEventArgs args)
     {
+        Debug.Log("Ladder Interacting");
         GameObject xrRig = GameObject.FindGameObjectWithTag("XRRig");
         xrRig.transform.Translate(new Vector3(0, 2.5f, 0));
     }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SceneTransistionTriggering : MonoBehaviour
 {
+
+    public SceneUtils.SceneId nextScene = SceneUtils.SceneId.Lobby;
+    public bool alreadyLoading = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +23,11 @@ public class SceneTransistionTriggering : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
+        if(other.tag == "Pen" && !alreadyLoading)
+        {
+            alreadyLoading = true;
+            SceneLoader.Instance.ChangeScene(SceneUtils.scenes[(int)nextScene]);
+
+        }
     }
 }

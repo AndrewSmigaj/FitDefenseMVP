@@ -19,6 +19,11 @@ public static class SceneMenu
         OpenScene(SceneUtils.Names.bunker);
     }
 
+    [MenuItem("Scenes/Game")]
+    public static void OpenGame()
+    {
+        OpenScene(SceneUtils.Names.game);
+    }
 
 
 

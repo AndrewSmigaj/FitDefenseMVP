@@ -8,7 +8,7 @@ public class SceneLoader : Singleton<SceneLoader>
 {
 
 
-    public float fadeSpeed = 0.025f;
+    public float fadeSpeed = 0.01f;
     public float fadeAmount = 0.0f;
 
     public Light sceneTransitionLight;
@@ -23,7 +23,7 @@ public class SceneLoader : Singleton<SceneLoader>
     private void Awake()
     {
 
-
+        Debug.Log("Loading Scene Loader");
         SceneManager.sceneLoaded += SetActiveScene;
 
         persistentScene = SceneManager.GetActiveScene();
@@ -33,6 +33,7 @@ public class SceneLoader : Singleton<SceneLoader>
         if (!Application.isEditor)
         {
             SceneManager.LoadSceneAsync(SceneUtils.Names.lobby, LoadSceneMode.Additive);
+            SceneUtils.AlignXRRig(persistentScene, SceneManager.GetActiveScene());
         }
         else
         {
@@ -106,7 +107,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         while(fadeAmount <= 1.0)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             fadeAmount += fadeSpeed;
 
             Color currentCol = fadeScreenMat.color;
@@ -120,7 +121,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         while (fadeAmount >= 0.0)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             fadeAmount -= fadeSpeed;
 
             Color currentCol = fadeScreenMat.color;

@@ -162,36 +162,40 @@ public class HandOld : MonoBehaviour
         //check if whether to hide it or not
         HandControlOld ctrl = args.interactableObject.transform.gameObject.GetComponent<HandControlOld>();
 
-        if (ctrl.fixedAttachment == null)
+        if (ctrl.isGrabbable)
         {
-            grabbedAttach = ctrl.attachTransform.transform;
-        }
-        else
-        {
-            grabbedAttach = ctrl.fixedAttachment.transform;
-        }
 
-        if(ctrl != null)
-        {
-            if (ctrl.hideHandOnGrab)
+            if (ctrl.fixedAttachment == null)
             {
-                Hide();
+                grabbedAttach = ctrl.attachTransform.transform;
             }
             else
             {
-                pose = ctrl.GetHandPose(handType);
+                grabbedAttach = ctrl.fixedAttachment.transform;
+            }
 
-                if(pose != null)
+            if (ctrl != null)
+            {
+                if (ctrl.hideHandOnGrab)
                 {
-                    if(ctrl.fixedAttachment != null)
+                    Hide();
+                }
+                else
+                {
+                    pose = ctrl.GetHandPose(handType);
+
+                    if (pose != null)
                     {
-                        handAttach = ctrl.fixedAttachment;
-                        restorePosition = handVisual.transform.localPosition;
-                        restoreRotation = handVisual.transform.localRotation;
+                        if (ctrl.fixedAttachment != null)
+                        {
+                            handAttach = ctrl.fixedAttachment;
+                            restorePosition = handVisual.transform.localPosition;
+                            restoreRotation = handVisual.transform.localRotation;
+                        }
+
+                        RunHandAnimation(1.0f);
+
                     }
-
-                    RunHandAnimation(1.0f);
-
                 }
             }
         }
@@ -201,24 +205,28 @@ public class HandOld : MonoBehaviour
     public void OnRelease(SelectExitEventArgs args)
     {
         HandControlOld ctrl = args.interactableObject.transform.gameObject.GetComponent<HandControlOld>();
-        grabbedAttach = null;
-        if (ctrl != null)
-        {
-            if (ctrl.hideHandOnGrab)
-            {
-                Show();
-            }
-            else if(pose != null)
-            {
-                RunHandAnimation(0.0f);
 
-                if(handAttach != null)
+        if (ctrl.isGrabbable)
+        {
+            grabbedAttach = null;
+            if (ctrl != null)
+            {
+                if (ctrl.hideHandOnGrab)
                 {
-                    handVisual.transform.localRotation = restoreRotation;
-                    handVisual.transform.localPosition = restorePosition;
-                    handAttach = null;
+                    Show();
                 }
-                pose = null;
+                else if (pose != null)
+                {
+                    RunHandAnimation(0.0f);
+
+                    if (handAttach != null)
+                    {
+                        handVisual.transform.localRotation = restoreRotation;
+                        handVisual.transform.localPosition = restorePosition;
+                        handAttach = null;
+                    }
+                    pose = null;
+                }
             }
         }
 

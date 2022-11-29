@@ -5,6 +5,9 @@ using UnityEngine;
 public class HandControlOld : MonoBehaviour
 {
     public bool hideHandOnGrab;
+    public bool isGrabbable = true;
+
+
     public HandPose leftHandPose = null;
     public HandPose rightHandPose = null;
     public Transform fixedAttachment;

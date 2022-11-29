@@ -11,10 +11,11 @@ public static class SceneUtils
     public enum SceneId
     {
         Lobby,
-        Bunker
+        Bunker,
+        Game
     }
 
-    public static readonly string[] scenes = {Names.lobby, Names.bunker};
+    public static readonly string[] scenes = {Names.lobby, Names.bunker, Names.game};
 
     public static GameObject XrRigPers { get => xrRigPers; set => xrRigPers = value; }
 
@@ -23,6 +24,7 @@ public static class SceneUtils
         public static string xRRigPersistentName = "XRPersistentScene";
         public static string lobby = "RecruitmentLobbyInMetaverseGym";
         public static string bunker = "Bunker";
+        public static string game = "GameScene";
 
     }
 
