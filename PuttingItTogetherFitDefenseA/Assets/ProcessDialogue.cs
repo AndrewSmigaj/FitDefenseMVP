@@ -105,13 +105,13 @@ public class ProcessDialogue : MonoBehaviour
 
             yield return null;
 
-            Camera cam = GameObject.FindGameObjectWithTag("CameraContainer").GetComponent<Camera>();
+            Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
             //Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
             Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1f))
+            if (Physics.Raycast(ray, out hit, 2f))
             {
                 if (hit.transform.tag == nextZoneTag)
                 {

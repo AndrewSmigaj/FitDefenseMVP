@@ -9102,6 +9102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextScene: 1
   alreadyLoading: 0
+  triggerTag: Pen
 --- !u!1 &1577630359
 GameObject:
   m_ObjectHideFlags: 0

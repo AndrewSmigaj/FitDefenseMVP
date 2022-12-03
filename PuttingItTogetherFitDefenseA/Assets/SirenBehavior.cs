@@ -23,8 +23,9 @@ public class SirenBehavior : MonoBehaviour
         
     }
 
-    public void SetSirenState(bool on)
+    IEnumerator SirenDelayThenFire(bool on)
     {
+        yield return new WaitForSeconds(2);
         if (on)
         {
             light.color = Color.red;
@@ -39,5 +40,9 @@ public class SirenBehavior : MonoBehaviour
             holoMats.Add(offMaterial);
             hologramMesh.materials = holoMats.ToArray();
         }
+    }
+    public void SetSirenState(bool on)
+    {
+        StartCoroutine(SirenDelayThenFire(on));
     }
 }
