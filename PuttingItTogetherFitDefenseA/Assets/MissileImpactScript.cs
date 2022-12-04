@@ -21,5 +21,6 @@ public class MissileImpactScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Instantiate(explosionPrefab, transform.position, transform.rotation);
+        Destroy(this.gameObject);
     }
 }

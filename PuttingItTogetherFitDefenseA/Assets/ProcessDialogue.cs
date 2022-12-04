@@ -103,7 +103,7 @@ public class ProcessDialogue : MonoBehaviour
 
 
 
-            yield return null;
+            yield return new WaitForSeconds(0.25f);
 
             Camera cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 

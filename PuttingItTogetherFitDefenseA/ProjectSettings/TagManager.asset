@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CameraContainer
+  - PlayerProgress
+  - XRRig
+  - XRRigOrigin
+  - Pen
+  - onboarding1
+  - onboarding4
+  - onboarding3
+  - onboarding2
+  - Ladder2
+  - Headset
+  - onboarding5
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -11,7 +24,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - OnboardingLayer
   - 
   - 
   - 

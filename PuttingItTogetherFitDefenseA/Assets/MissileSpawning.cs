@@ -35,7 +35,7 @@ public class MissileSpawning : MonoBehaviour
 
     IEnumerator PivotControl()
     {
-        yield return new WaitForSeconds(60);
+        yield return new WaitForSeconds(15);
 
         dialogue.SetActive(true);
         isLaunchingMissiles = false;
