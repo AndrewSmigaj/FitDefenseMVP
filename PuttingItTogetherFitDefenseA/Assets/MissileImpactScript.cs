@@ -6,7 +6,12 @@ public class MissileImpactScript : MonoBehaviour
 {
 
     public GameObject explosionPrefab;
-    // Start is called before the first frame update
+
+    //we want to update a collected score for buildings.  Mostly designed in for cars and residential areas where there are multiple residential buildings to target, without having too many damage scores.
+
+    public GameObject buildingDamageObject = null;
+
+    public int damageAmount = -10;
     void Start()
     {
         
@@ -21,6 +26,8 @@ public class MissileImpactScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Instantiate(explosionPrefab, transform.position, transform.rotation);
-        Destroy(this.gameObject);
+
+        buildingDamageObject.GetComponent<BuildingDamage>().AdjustDamage(damageAmount);
+        Destroy(other.gameObject);
     }
 }

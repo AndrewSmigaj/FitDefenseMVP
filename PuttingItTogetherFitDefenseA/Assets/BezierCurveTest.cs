@@ -6,6 +6,8 @@ public class BezierCurveTest : MonoBehaviour
 {
     public Transform[] controlPoints;
 
+
+
     public GameObject movingObjectPrefab;
     GameObject movingObject;
 
@@ -15,7 +17,7 @@ public class BezierCurveTest : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Start( )
     {
         if (!lineRenderer)
         {
@@ -25,6 +27,8 @@ public class BezierCurveTest : MonoBehaviour
         {
             movingObject = Instantiate(movingObjectPrefab, controlPoints[0].position, movingObjectPrefab.transform.rotation);
         }
+
+
         StartCoroutine(MoveAlongControlPoints());
     }
 

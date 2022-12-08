@@ -7,15 +7,17 @@ public class MissileSpawning : MonoBehaviour
     // Start is called before the first frame update
     public GameObject[] missileSpawners = new GameObject[4];
     public GameObject missilePrefab;
-    public Transform railSystemPivot;
-    public Transform HUDPivot;
-    public GameObject dialogue;
 
-    bool isLaunchingMissiles = true;
+    public List<Transform> targets = new List<Transform>(4);
+
+    public bool isLaunchingMissiles = false;
 
     void Start()
     {
-        StartCoroutine(PivotControl());
+/*        targets.Add(null);
+        targets.Add(null);
+        targets.Add(null);
+        targets.Add(null);*/
     }
 
     // Update is called once per frame
@@ -28,24 +30,32 @@ public class MissileSpawning : MonoBehaviour
     {
         if (isLaunchingMissiles)
         {
-            Instantiate(missilePrefab, missileSpawners[spawnIndex].transform.position, missileSpawners[spawnIndex].transform.rotation);
+      
+            if(targets[3] != null)
+            {
+                GameObject nextMissile = Instantiate(missilePrefab, missileSpawners[spawnIndex].transform.position, missileSpawners[spawnIndex].transform.rotation);
+                nextMissile.GetComponent<BezierCurveTest>().controlPoints[2] = targets[spawnIndex];
+            }
 
+            
         }
     }
 
-    IEnumerator PivotControl()
+    public void SetTarget(int spawnIndex, Transform newTarget)
     {
-        yield return new WaitForSeconds(15);
-
-        dialogue.SetActive(true);
-        isLaunchingMissiles = false;
-        //dialogue trigger
-
-        yield return new WaitForSeconds(3);
-        dialogue.SetActive(false);
-        
-        railSystemPivot.transform.Rotate(new Vector3(0, 180, 0));
-        HUDPivot.transform.Rotate(new Vector3(0, 180, 0));
-        isLaunchingMissiles = true;
+        targets[spawnIndex] = newTarget;
     }
+
+
+
+
+
+
+
+
+
+
+    //retarget
+
+
 }

@@ -10,7 +10,8 @@ public class MusicEvent : UnityEvent<int> { };
 public class AudioProcessing : MonoBehaviour
 {
     // Start is called before the first frame update
-    private AudioSource audioSource;
+    public float delayAtBeginning = 3;
+    public AudioSource audioSource;
     public MusicEvent musicEvent = new MusicEvent();
 
     public float cutoff0 = 0.25f;
@@ -20,12 +21,31 @@ public class AudioProcessing : MonoBehaviour
 
     public float missileThreshold = 4;
 
+    public float frequency = 1;
+
+
+   // public Coroutine musicCoroutine = null;
+    public Coroutine samplingCoroutine = null;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(GetSamplesOngoing());
+
+        
+
     }
 
+    public void StartMusic()
+    {
+        audioSource.Play();
+    }
+
+    public void StartSamples()
+    {
+        samplingCoroutine = StartCoroutine(GetSamplesOngoing());
+
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -81,9 +101,11 @@ public class AudioProcessing : MonoBehaviour
 
     IEnumerator GetSamplesOngoing()
     {
+        yield return new WaitForSeconds(delayAtBeginning);
+
         while (true)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(frequency);
             GetNextSampleAndVisualize();
         }
 
