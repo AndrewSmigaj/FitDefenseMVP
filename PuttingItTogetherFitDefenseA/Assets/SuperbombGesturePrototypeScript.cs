@@ -9,28 +9,43 @@ public class SuperbombGesturePrototypeScript : MonoBehaviour
     public GameObject other;
     public GameObject shockWave;
 
+    public Transform shockWavePosition = null;
+
     public bool isTriggered;
 
     public bool fireShockwave = true;
 
-    public float rechargeTime = 5;
+    public float rechargeTime = 75;
     public float currentTime = 0;
+
+
+    public AdjustableParameters parameters = null;
+
+    public int currrentSBCount = 0;
+
+    public TMPro.TextMeshProUGUI superbombCountTextbox = null;
+    public RectTransform superBombSlider = null;
 
 
     void Start()
     {
-        
+        StartCoroutine(Recharge());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isTriggered && other.GetComponent<SecondSuperbombTriggerzoneScript>().isTriggered && fireShockwave)
+        if (isTriggered && other.GetComponent<SecondSuperbombTriggerzoneScript>().isTriggered && currrentSBCount >= 1)
         {
             Debug.Log("Got to trigger shockwave.");
             fireShockwave = false;
-            shockWave.GetComponent<ShockwavePrototype>().TriggerWave();
-            StartCoroutine(Recharge());
+            currrentSBCount -= 1;
+
+            superbombCountTextbox.text = currrentSBCount.ToString();
+
+
+            Instantiate(shockWave, shockWavePosition.position, shockWavePosition.rotation); 
+
         }
     }
 
@@ -50,12 +65,32 @@ public class SuperbombGesturePrototypeScript : MonoBehaviour
 
     IEnumerator Recharge()
     {
-        while(currentTime < rechargeTime)
+        while (true)
         {
-            currentTime += Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime);
+            while (currentTime < rechargeTime)
+            {
+                currentTime += Time.deltaTime * parameters.superbombConstructionAmount;
+
+
+
+
+                superBombSlider.sizeDelta = new Vector2(currentTime, 0);
+
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            currentTime = 0;
+            currrentSBCount += 1;
+            superbombCountTextbox.text = currrentSBCount.ToString();
+
+            fireShockwave = true;
         }
-        fireShockwave = true;
-        currentTime = 0;
+
+
+
     }
+
+    
+
+
+    
 }

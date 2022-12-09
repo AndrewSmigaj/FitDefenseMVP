@@ -25,9 +25,13 @@ public class MissileImpactScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        if(other.tag == "Missile")
+        {
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
 
-        buildingDamageObject.GetComponent<BuildingDamage>().AdjustDamage(damageAmount);
-        Destroy(other.gameObject);
+            buildingDamageObject.GetComponent<BuildingDamage>().AdjustDamage(damageAmount);
+            Destroy(other.gameObject);
+        }
+
     }
 }

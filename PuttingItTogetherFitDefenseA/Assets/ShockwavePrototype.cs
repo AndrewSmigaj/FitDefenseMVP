@@ -5,11 +5,13 @@ using UnityEngine;
 public class ShockwavePrototype : MonoBehaviour
 {
     // Start is called before the first frame update
-    float maxScale = 7;
-    float currentScale = 1;
+    public float maxScale = 14;
+    public float currentScale = 1;
+
+    public GameObject explosionPrefab;
     void Start()
     {
-        
+        StartCoroutine(testShockwaveLogic());
     }
 
     // Update is called once per frame
@@ -22,17 +24,25 @@ public class ShockwavePrototype : MonoBehaviour
     {
         while(currentScale < maxScale)
         {
-            currentScale += 0.1f;
+            currentScale += 0.3f;
 
             this.transform.localScale = Vector3.one * currentScale;
-            yield return new WaitForSeconds(0.025f);
+            yield return new WaitForSeconds(0.02f);
         }
-        currentScale = 1;
-        this.transform.localScale = Vector3.one * currentScale;
+        Destroy(this);
     }
 
-    public void TriggerWave()
+    private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(testShockwaveLogic());
+        if(other.tag == "Missile"){
+
+
+            Instantiate(explosionPrefab, transform.position, transform.rotation);
+
+            //buildingDamageObject.GetComponent<BuildingDamage>().AdjustDamage(damageAmount);
+            Destroy(other.gameObject);
+        }
     }
+
+
 }

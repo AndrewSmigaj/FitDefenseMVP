@@ -8,6 +8,8 @@ public class MissileSpawning : MonoBehaviour
     public GameObject[] missileSpawners = new GameObject[4];
     public GameObject missilePrefab;
 
+    public GameObject targetSignifier = null;
+
     public List<Transform> targets = new List<Transform>(4);
 
     public bool isLaunchingMissiles = false;
@@ -43,7 +45,19 @@ public class MissileSpawning : MonoBehaviour
 
     public void SetTarget(int spawnIndex, Transform newTarget)
     {
+
+
         targets[spawnIndex] = newTarget;
+        StartCoroutine(TargetLocationVisual(newTarget));
+
+    }
+
+    IEnumerator TargetLocationVisual(Transform newTarget)
+    {
+        GameObject visual = Instantiate(targetSignifier, newTarget.position, newTarget.rotation);
+
+        yield return new WaitForSeconds(1);
+        Destroy(visual);
     }
 
 

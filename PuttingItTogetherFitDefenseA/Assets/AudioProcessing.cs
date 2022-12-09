@@ -46,6 +46,11 @@ public class AudioProcessing : MonoBehaviour
 
 
     }
+
+    public void StopSamples()
+    {
+        StopCoroutine(samplingCoroutine);
+    }
     // Update is called once per frame
     void Update()
     {
