@@ -15,7 +15,7 @@ public class SuperbombGesturePrototypeScript : MonoBehaviour
 
     public bool fireShockwave = true;
 
-    public float rechargeTime = 75;
+    public float rechargeTime = 120;
     public float currentTime = 0;
 
 
@@ -69,14 +69,14 @@ public class SuperbombGesturePrototypeScript : MonoBehaviour
         {
             while (currentTime < rechargeTime)
             {
-                currentTime += Time.deltaTime * parameters.superbombConstructionAmount;
+                currentTime += 0.1f * parameters.superbombConstructionAmount;
 
 
 
 
-                superBombSlider.sizeDelta = new Vector2(currentTime, 0);
+                superBombSlider.sizeDelta = new Vector2(currentTime * 3, 0);
 
-                yield return new WaitForSeconds(Time.deltaTime);
+                yield return new WaitForSeconds(0.1f);
             }
             currentTime = 0;
             currrentSBCount += 1;
