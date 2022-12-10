@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShockwavePrototype : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float maxScale = 14;
+    public float maxScale = 10;
     public float currentScale = 1;
 
     public GameObject explosionPrefab;
@@ -27,9 +27,9 @@ public class ShockwavePrototype : MonoBehaviour
             currentScale += 0.3f;
 
             this.transform.localScale = Vector3.one * currentScale;
-            yield return new WaitForSeconds(0.02f);
+            yield return new WaitForSeconds(0.025f);
         }
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +37,7 @@ public class ShockwavePrototype : MonoBehaviour
         if(other.tag == "Missile"){
 
 
-            Instantiate(explosionPrefab, transform.position, transform.rotation);
+            Instantiate(explosionPrefab, other.transform.position, other.transform.rotation);
 
             //buildingDamageObject.GetComponent<BuildingDamage>().AdjustDamage(damageAmount);
             Destroy(other.gameObject);

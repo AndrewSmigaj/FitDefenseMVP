@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class SmokeAndFire : MonoBehaviour
 {
+
+
+    public GameObject smokePrefab;
+
+    public BuildingDamage damageObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +21,5 @@ public class SmokeAndFire : MonoBehaviour
     {
         
     }
+
 }
