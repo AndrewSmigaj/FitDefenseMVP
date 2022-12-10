@@ -9,7 +9,9 @@ public class GameScript : MonoBehaviour
     public Pivot pivotSystem = null;
     public AudioProcessing audioModule = null;
 
+    public ShieldSystem shields = null;
 
+    public SuperbombGesturePrototypeScript superbombs = null;
     //side one
     public List<Transform> side1Targets = new List<Transform>();
 
@@ -20,7 +22,7 @@ public class GameScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(RunGameScript());
+        //StartCoroutine(RunGameScript());
     }
 
     // Update is called once per frame
@@ -35,9 +37,11 @@ public class GameScript : MonoBehaviour
 
     public IEnumerator RunGameScript()
     {
-
-
+        dialogue.SetActive(false);
+        yield return new WaitForSeconds(1);
         //set targets  
+        dialogue.SetActive(true);
+
         dialogueTextbox.text = "Hello and  welcome to your station! Since this is your first day let's review a few things from the manual.";
         yield return new WaitForSeconds(5);
 
@@ -49,6 +53,9 @@ public class GameScript : MonoBehaviour
 
         audioModule.StartMusic();
         audioModule.StartSamples();
+
+        shields.StartRecharging();
+        superbombs.StartSuperbombSystem();
 
         yield return new WaitForSeconds(0.5f);
         spawning.GetComponent<MissileSpawning>().SetTarget(0, side1Targets[3]);

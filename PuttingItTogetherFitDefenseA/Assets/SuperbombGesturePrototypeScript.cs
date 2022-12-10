@@ -29,7 +29,7 @@ public class SuperbombGesturePrototypeScript : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(Recharge());
+
     }
 
     // Update is called once per frame
@@ -62,7 +62,10 @@ public class SuperbombGesturePrototypeScript : MonoBehaviour
         isTriggered = false;
     }
 
-
+    public void StartSuperbombSystem()
+    {
+        StartCoroutine(Recharge());
+    }
     IEnumerator Recharge()
     {
         while (true)

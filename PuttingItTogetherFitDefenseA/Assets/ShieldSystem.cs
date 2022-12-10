@@ -20,7 +20,7 @@ public class ShieldSystem : MonoBehaviour
 
     void Start()
     {
-        StartRecharging();
+        //StartRecharging();
     }
 
     // Update is called once per frame

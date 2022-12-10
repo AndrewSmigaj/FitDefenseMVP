@@ -67,6 +67,7 @@ public class Hand : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     private void OnEnable()
     {
         interactor?.onSelectEntered.AddListener(OnGrab);

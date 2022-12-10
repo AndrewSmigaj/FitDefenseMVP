@@ -61,6 +61,7 @@ public class TurnInteractable : XRBaseInteractable
         }
     }
 
+    [Obsolete]
     protected override void OnSelectEntered(XRBaseInteractor interactor)
     {
         m_interactor = interactor;
@@ -68,6 +69,7 @@ public class TurnInteractable : XRBaseInteractable
         base.OnSelectEntered(interactor);
     }
 
+    [Obsolete]
     protected override void OnSelectExited(XRBaseInteractor interactor)
     {
         StopTurn();
