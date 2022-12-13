@@ -6,13 +6,26 @@ public class MissileSpawning : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject[] missileSpawners = new GameObject[4];
-    public GameObject missilePrefab;
+
+    public List<GameObject> missilePrefabs;
+
 
     public GameObject targetSignifier = null;
 
     public List<Transform> targets = new List<Transform>(4);
 
     public bool isLaunchingMissiles = false;
+
+    
+
+    public enum colorPattern
+    {
+        Mixed, Red, Blue, Green, Black
+    }
+
+    public colorPattern pattern = colorPattern.Mixed;
+
+
 
     void Start()
     {
@@ -35,8 +48,18 @@ public class MissileSpawning : MonoBehaviour
       
             if(targets[3] != null)
             {
-                GameObject nextMissile = Instantiate(missilePrefab, missileSpawners[spawnIndex].transform.position, missileSpawners[spawnIndex].transform.rotation);
-                nextMissile.GetComponent<BezierCurveTest>().controlPoints[2] = targets[spawnIndex];
+                if (pattern.Equals(colorPattern.Mixed))
+                {
+                    GameObject missilePrefab;
+
+                    GameObject nextMissile = Instantiate(missilePrefabs[spawnIndex], missileSpawners[spawnIndex].transform.position, missileSpawners[spawnIndex].transform.rotation);
+                    nextMissile.GetComponent<BezierCurveTest>().controlPoints[2] = targets[spawnIndex];
+                }
+                else if (pattern.Equals(colorPattern.Red))
+                {
+
+                }
+
             }
 
             

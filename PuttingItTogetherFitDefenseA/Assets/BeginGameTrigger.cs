@@ -7,6 +7,8 @@ public class BeginGameTrigger : MonoBehaviour
     public Canvas canvas = null;
 
     public GameScript script = null;
+
+    public bool isRunning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,11 @@ public class BeginGameTrigger : MonoBehaviour
         Debug.Log("Start button triggered");
 
         canvas.enabled = false;
-        StartCoroutine(script.RunGameScript());
+
+        if (!isRunning)
+        {
+            isRunning = true;
+            StartCoroutine(script.RunGameScript());
+        }
     }
 }

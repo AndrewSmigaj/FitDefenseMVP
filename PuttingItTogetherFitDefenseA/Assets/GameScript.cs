@@ -22,7 +22,7 @@ public class GameScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(RunGameScript());
+        StartCoroutine(RunGameScript());
     }
 
     // Update is called once per frame
@@ -89,6 +89,11 @@ public class GameScript : MonoBehaviour
 
         dialogue.SetActive(true);
 
+        //move spawners out
+        spawning.GetComponent<MissileSpawning>().missileSpawners[0].transform.Translate(5 * Vector3.left, Space.World);
+        spawning.GetComponent<MissileSpawning>().missileSpawners[0].transform.Translate(5 * Vector3.right, Space.World);
+
+
         yield return new WaitForSeconds(0.5f);
         spawning.GetComponent<MissileSpawning>().SetTarget(0, side1Targets[0]);
         yield return new WaitForSeconds(0.5f);
@@ -114,10 +119,28 @@ public class GameScript : MonoBehaviour
 
         yield return new WaitForSeconds(12);
 
+
+        dialogueTextbox.text = "Up for a challenge?  Two have moved out to your left and right and are preparing an attack.";
+
+        yield return new WaitForSeconds(5);
+
+        dialogue.SetActive(false);
+
+        spawning.GetComponent<MissileSpawning>().missileSpawners[0].transform.Translate(10 * Vector3.left, Space.World);
+        spawning.GetComponent<MissileSpawning>().missileSpawners[0].transform.Translate(10 * Vector3.right, Space.World);
+
         //spawning.GetComponent<MissileSpawning>().isLaunchingMissiles = false;
 
         audioModule.StopSamples();
         //superbomb
+
+
+        yield return StartCoroutine(WaveForLeftRightAlternate());
+
+
+
+        spawning.GetComponent<MissileSpawning>().missileSpawners[0].transform.Translate(-15 * Vector3.left, Space.World);
+        spawning.GetComponent<MissileSpawning>().missileSpawners[0].transform.Translate(-15 * Vector3.right, Space.World);
 
 
         dialogueTextbox.text = "Our munitions factory constructed a new superbomb!  Punch out to the left and right at the same time to activate (placeholder).  A wave is coming so use it wisely!";
@@ -138,6 +161,20 @@ public class GameScript : MonoBehaviour
 
 
         yield return new WaitForSeconds(2);
+
+
+
+
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(0, side1Targets[0]);
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(1, side1Targets[1]);
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(2, side1Targets[2]);
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(3, side1Targets[3]);
+        yield return new WaitForSeconds(3f);
+
 
         audioModule.StartSamples();
 
@@ -185,6 +222,8 @@ public class GameScript : MonoBehaviour
 
         StartCoroutine(pivotSystem.PivotDirection());
 
+        dialogue.SetActive(false);
+
         for (int i = 0; i < 10; i++)
         {
             spawning.GetComponent<MissileSpawning>().SetTarget(Random.Range(0, 3), side2Targets[Random.Range(0, 7)]);
@@ -193,8 +232,36 @@ public class GameScript : MonoBehaviour
 
         }
 
-        //here is where we can set up rail targets for now
 
+        yield return new WaitForSeconds(1);
+
+        StartCoroutine(pivotSystem.PivotDirection());
+
+
+
+        spawning.GetComponent<MissileSpawning>().isLaunchingMissiles = false;
+
+        dialogueTextbox.text = "And that is a day in the life.  Nothing much on the radar so lets finish this wave and see how you did.";
+
+        dialogue.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(0, side1Targets[3]);
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(1, side1Targets[2]);
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(2, side1Targets[1]);
+        yield return new WaitForSeconds(0.5f);
+        spawning.GetComponent<MissileSpawning>().SetTarget(3, side1Targets[0]);
+
+
+        spawning.GetComponent<MissileSpawning>().isLaunchingMissiles = true;
+
+        yield return new WaitForSeconds(5);
+
+        dialogue.SetActive(false);
+        //END GAME.
+        yield return new WaitForSeconds(1);
     }
 
 
@@ -214,5 +281,24 @@ public class GameScript : MonoBehaviour
 
         }
     }
+
+
+    IEnumerator WaveForLeftRightAlternate()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            yield return new WaitForSeconds(1f);
+
+            spawning.GetComponent<MissileSpawning>().LaunchMissile(0);
+
+            yield return new WaitForSeconds(1f);
+            spawning.GetComponent<MissileSpawning>().LaunchMissile(3);
+
+
+        }
+
+
+    }
+
 
 }
